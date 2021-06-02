@@ -1,0 +1,33 @@
+@            SAHABAT KARTINI
+          JLN. KARTINI, TEGAL
+11:15:12
+06-01-2018 OTB-0118-00002 admin
+Asal Gudang :SP WERKUDORO
+Tujuan Gudang :SP KARTINI
+Status :Receipt/Diterima
+----------------------------------------
+KELOMPOK: KACANG
+GARUDA KULIT 400GR GB               5.00
+
+KELOMPOK: KAPAS&COTTON BUDS
+ANGEL CB BABY 125S                  3.00
+
+KELOMPOK: KOPI & GULA
+ABC KOPI WHITE 10X27G               7.00
+CB CAPUCCINO 10X18GR                2.00
+
+KELOMPOK: MIE INSTAN
+MI ABC GR AY PDS LIMAU 85G          6.00
+
+KELOMPOK: SUSU BUBUK
+ANLENE GOLD 250GR VANILA            5.00
+
+----------------------------------------
+JUMLAH ITEM :                      28.00
+
+
+
+
+
+
+

@@ -1,0 +1,60 @@
+@        AROMA BAKERY & CAKE SHOP
+           JL. SM RAJA, MEDAN
+06-03-2021 12:44:41
+----------------------------------------
+KASIR :admin
+SHIFT :
+----------------------------------------
+BIKA AMBON SETENGAH                 pcs
+             1                        0
+BIKA AMBON MINI                     pcs
+        3                   72,000
+BIKA AMBON PETAK                    pcs
+        4                  200,000
+BIKA AMBON PANDAN PETAK             pcs
+        5                  250,000
+----------------------------------------
+TOTAL QTY : 13
+TOTAL QTY BATAL : 0
+TOTAL CUSTOMER BUYING : 12
+SUB TOTAL : 522,000
+TOTAL DISCOUNT : 0
+TOTAL PENJUALAN : 522,000
+
+KASIR :rafikasmraja
+SHIFT :
+----------------------------------------
+ROTI ABON AYAM                      pcs
+         12                   78,000
+BIKA AMBON PANDAN PETAK             pcs
+        1                   50,000
+BIKA AMBON PETAK                    pcs
+        2                  100,000
+----------------------------------------
+TOTAL QTY : 15
+TOTAL QTY BATAL : 0
+TOTAL CUSTOMER BUYING : 24
+SUB TOTAL : 228,000
+TOTAL DISCOUNT : 1,000
+TOTAL PENJUALAN : 227,000
+
+KASIR :renismraja
+SHIFT :
+----------------------------------------
+BIKA AMBON PETAK                    pcs
+        7                  350,000
+----------------------------------------
+TOTAL QTY : 7
+TOTAL QTY BATAL : 0
+TOTAL CUSTOMER BUYING : 36
+SUB TOTAL : 350,000
+TOTAL DISCOUNT : 0
+TOTAL PENJUALAN : 350,000
+
+
+
+
+
+
+
+

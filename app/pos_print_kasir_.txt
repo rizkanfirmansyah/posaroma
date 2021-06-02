@@ -1,0 +1,50 @@
+@        AROMA BAKERY & CAKE SHOP
+Jl. Sisingamangaraja XII,Km 6,5 No.29,  Medan
+18-01-2021 23:43:57
+----------------------------------------
+
+KASIR :rafikasmraja
+SHIFT :
+----------------------------------------
+ROTI KEPANG COKLAT CERES            pcs
+        2                   30,000
+BOLU PISANG SPESIAL PETAK           pcs
+        1                        0
+BOLU PISANG SPESIAL MINI            pcs
+        1                   20,000
+BIKA AMBON PANDAN PETAK             pcs
+        14                  700,000
+ROTI ABON ROLL AYAM                 pcs
+         2                   13,000
+BIKA AMBON PETAK                    pcs
+        1                        0
+ROTI SOBEK KOPI COKLAT              pcs
+        2                   30,000
+BOLU PISANG SPESIAL PETAK           pcs
+        1                   50,000
+BIKA AMBON SETENGAH                 pcs
+        2                   54,000
+ROTI BUNGKUS COKLAT KEJU            pcs
+        1                   20,000
+ROTI SOBEK KACANG MERAH             pcs
+        1                   15,000
+BIKA AMBON MINI                     pcs
+        2                   48,000
+BIKA AMBON PETAK                    pcs
+        2                  100,000
+----------------------------------------
+TOTAL QTY : 30
+TOTAL QTY BATAL : 2
+TOTAL CUSTOMER BUYING : 7
+SUB TOTAL : 1,080,000
+TOTAL DISCOUNT : 73,000
+TOTAL PENJUALAN : 1,007,000
+
+
+
+
+
+
+
+
+

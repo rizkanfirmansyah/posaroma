@@ -1,0 +1,17 @@
+[10-Apr-2021 15:35:16 UTC] PHP Fatal error:  Uncaught Error: Call to a member function list_warehouse() on null in /home/erparoma/pos.erparoma.com/json/sales_list.php:27
+Stack trace:
+#0 {main}
+  thrown in /home/erparoma/pos.erparoma.com/json/sales_list.php on line 27
+[10-Apr-2021 17:30:05 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 131
+[10-Apr-2021 17:31:05 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:32:12 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:32:36 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:33:04 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:33:47 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:34:20 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[10-Apr-2021 17:37:07 UTC] PHP Parse error:  syntax error, unexpected 'else' (T_ELSE), expecting end of file in /home/erparoma/pos.erparoma.com/json/sales_daily_y.php on line 132
+[13-Apr-2021 07:26:57 UTC] PHP Warning:  A non-numeric value encountered in /home/erparoma/pos.erparoma.com/json/sales_daily_z_sum.php on line 88
+[13-Apr-2021 07:27:46 UTC] PHP Warning:  A non-numeric value encountered in /home/erparoma/pos.erparoma.com/json/sales_daily_z_sum.php on line 88
+[13-Apr-2021 09:32:38 UTC] PHP Fatal error:  Redefinition of parameter $shift in /home/erparoma/pos.erparoma.com/app/class/class.selectview.php on line 5491
+[13-Apr-2021 09:33:06 UTC] PHP Fatal error:  Redefinition of parameter $shift in /home/erparoma/pos.erparoma.com/app/class/class.selectview.php on line 5491
+[13-Apr-2021 09:33:26 UTC] PHP Fatal error:  Redefinition of parameter $shift in /home/erparoma/pos.erparoma.com/app/class/class.selectview.php on line 5491

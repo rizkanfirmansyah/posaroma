@@ -1,0 +1,35 @@
+@        AROMA BAKERY & CAKE SHOP
+Jl. Sisingamangaraja XII,Km 6,5 No.29,  Medan
+17-03-2021 15:27:18
+----------------------------------------
+KASIR :renismraja
+SHIFT :
+----------------------------------------
+ROTI BUNGKUS COKLAT KEJU            pcs
+        1                   20,000
+BIKA AMBON PANDAN PETAK             pcs
+             0                        0
+BIKA AMBON PETAK                    pcs
+        2                  100,000
+BIKA AMBON PANDAN PETAK             pcs
+        59                2,950,000
+ROTI ABON AYAM                      pcs
+         1                    6,500
+BIKA AMBON PETAK                    pcs
+             0                        0
+ROTI SOSIS ABON SAPI                pcs
+         2                   13,000
+----------------------------------------
+TOTAL QTY : 65
+TOTAL QTY BATAL : 0
+TOTAL CUSTOMER BUYING : 6
+SUB TOTAL : 3,089,500
+TOTAL DISCOUNT : 0
+TOTAL PENJUALAN : 3,089,500
+
+
+
+
+
+
+

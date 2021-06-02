@@ -1,0 +1,26 @@
+@              SP WERKUDORO
+               WERKUDORO
+18:24:20
+10-01-2018 13POS-0118-00010 kasir1
+----------------------------------------
+400001 AYAM 2 TELOR KERITING 200GR   pcs
+  5000.00 X        3,500 =    17,500,000
+350070 TELOR 1KG                     pcs
+     1.00 X    23,700 =           23,700
+----------------------------------------
+JUMLAH ITEM :                      5,001
+T O T A L :                   17,523,700
+----------------------------------------
+T U N A I :                   17,523,700
+----------------------------------------
+D I B A Y A R :               20,000,000
+K E M B A L I A N :            2,476,300
+        Barang yang sudah dibeli 
+        Tidak dapat dikembalikan 
+    Terima Kasih Atas Kunjungan Anda
+
+
+
+
+
+

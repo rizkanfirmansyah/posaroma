@@ -1,0 +1,34 @@
+@        AROMA BAKERY & CAKE SHOP
+Jl. Sisingamangaraja XII,Km 6,5 No.29,  Medan
+11-04-2021 13:53:02
+----------------------------------------
+KASIR :rizkismraja
+SHIFT :
+DAILY (Z)
+----------------------------------------
+ROTI ABON SAPI                      pcs
+         1                    7,000
+BIKA AMBON PETAK                    pcs
+        1                   50,000
+BOLU PISANG SPESIAL SEDANG          pcs
+        2                   56,000
+BOLU PISANG SPESIAL MINI            pcs
+        1                   20,000
+ROTI SOSIS ABON AYAM                pcs
+         1                    7,000
+ROTI SOSIS ABON SAPI                pcs
+         1                    7,000
+----------------------------------------
+TOTAL QTY : 7
+TOTAL QTY BATAL : 0
+TOTAL CUSTOMER BUYING : 5
+SUB TOTAL : 147,000
+TOTAL DISCOUNT : 0
+TOTAL PENJUALAN : 147,000
+
+
+
+
+
+
+

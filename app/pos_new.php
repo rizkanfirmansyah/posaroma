@@ -1,4 +1,4 @@
-<?php
+    <?php
 @session_start();
 include 'new/insert_pos.php';
 
@@ -16,6 +16,7 @@ $new = new pos_new;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://pos.erparoma.com/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>POS AROMA</title>
 </head>
 
@@ -258,6 +259,39 @@ $new = new pos_new;
 
     </footer>
 
+    <!-- MODAL -->
+
+    <!-- Modal -->
+        <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPaymentTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPaymentTitle">Pembayaran Nota:<?= $_GET['code']?></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding:20px;">
+                <label for="total">Total</label>
+                <input type="text" class="form-control" placeholder="Value Total" id="totalPayment" disabled>&nbsp;
+                <label for="discount">Discount</label>
+                <input type="text" class="form-control payments" placeholder="Value Discount" value="0" id="discountPayment" disabled    >&nbsp;
+                <label for="ovo">Ovo</label>
+                <input type="text" class="form-control payments" placeholder="Value Ovo">&nbsp;
+                <label for="debit">Debit</label>
+                <input type="text" class="form-control payments" placeholder="Value Debit">&nbsp;
+                <label for="cash">Cash</label>
+                <input type="text" class="form-control payments" placeholder="Value Cash" id="cashPayment">&nbsp;
+                <label for="kembalian">Kembalian</label>
+                <input type="text" class="form-control" placeholder="Value Kembalian" value="0" id="kembalianPayment" disabled>&nbsp;
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Bayar</button>
+            </div>
+            </div>
+        </div>
+        </div>
+
 
 </body>
 
@@ -278,6 +312,8 @@ $new = new pos_new;
             `
             $('#zero-space').html(html)
             $('#deleteItem').focus()
+        }else if(key == 'Escape'){
+            $('#InputanItem').focus()
         }
     })
     let cost = 200000
@@ -310,6 +346,18 @@ $new = new pos_new;
             $('#tanggal').text(tgl)
         }, 1000);
 
+        $('#modalPayment').on('keyup', '.payments', function(e) {
+            let id = $(this).attr('id');
+            let value = $(this).val().replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '')
+            let val = value.replace('.', '')
+            let charCode = /^[0-9]+$/
+            if (value.match(charCode)) {
+                ketikRupiah({id:id, val:val})
+            }
+        })
+
+        $('#InputanItem').focus()
+
         getdata('<?= $_GET['code'] ?>')
 
         $('#zero-space').on('keydown', '#deleteItem', function(e) {
@@ -320,11 +368,11 @@ $new = new pos_new;
                     url: 'new/delete_item.php',
                     type: 'POST',
                     data: {
-                        value: value,
-                        code: <?= $_GET['code'] ?>
+                            value: value,
+                        code: '<?= $_GET['code'] ?>'
                     },
                     success: res => {
-                        getdata(<?= $_GET['code'] ?>)
+                        getdata('<?= $_GET['code'] ?>')
                     },
                     error: err => {
                         console.log(err);
@@ -353,31 +401,39 @@ $new = new pos_new;
 
         $('#zero-space').on('submit', '#editItem', function(e) {
             e.preventDefault()
-            let key = e.key
-            if (key == 'Enter') {
-                let value = $(this).val()
+                let code = $('#editItemCode').val()
+                let qty = $('#editItemQty').val()
+                if (code == undefined || code == '' || code == ' ') {
+                    alert('Masukkan Code Item terlebih dahulu');
+                    return 0;
+                }else if(qty < 1 || qty == '' || code == ' '){
+                    alert('Masukkan Qty Item terlebih dahulu');
+                    return 0;
+                }
                 $.ajax({
                     url: 'new/edit_item.php',
-                    type: 'POST',
+                    type: 'POST',   
                     data: {
-                        value: value,
-                        code: <?= $_GET['code'] ?>
+                        itemCode:code,
+                        itemQty:qty,
+                        code: '<?= $_GET['code'] ?>'
                     },
                     success: res => {
-                        getdata(<?= $_GET['code'] ?>)
+                        let response = JSON.parse(res)
+                        if (response.status == 404) {
+                            alert(response.message);
+                            return 0;
+                        }
+                        getdata('<?= $_GET['code'] ?>')
                     },
                     error: err => {
                         console.log(err);
                     }
                 })
-            } else if (key == 'F2') {
-                $('#zero-space').html('')
-                $('#InputanItem').focus()
-            }
         })
     })
 
-    function myFunction(event) {
+    async function myFunction(event) {
         var x = event.key;
         let id = ''
         let idProduk = ''
@@ -450,6 +506,29 @@ $new = new pos_new;
                 $('#zero-space').html('')
                 $('#InputanItem').focus()
             }
+        } else if(x == 'F4'){
+            $('#modalPayment').modal()
+            let total = await getTotalPrice()
+            $('#totalPayment').val(rupiah(total))
+            $('#totalPayment').data('value', total)
+        }
+    }
+
+    async function getTotalPrice()
+    {
+        try {
+            const res = await getTotal('<?= $_GET['code'] ?>')
+            let response = JSON.parse(res)
+            let html = ' '
+            let qty = 0
+            let total = 0
+            response.invoice.forEach(data => {
+                total += Number(data.total)
+                qty += Number(data.qty)
+            })
+            return total;
+        } catch(err) {
+            console.log(err);
         }
     }
 
@@ -459,7 +538,7 @@ $new = new pos_new;
             type: 'POST',
             data: {
                 data: data,
-                code: <?= $_GET['code'] ?>,
+                code: '<?= $_GET['code'] ?>',
             },
             success: res => {
                 console.log(res);
@@ -508,6 +587,23 @@ $new = new pos_new;
         })
     }
 
+    function getTotal(params){
+        let total = 0
+        return $.ajax({
+            url: 'new/check_invoice.php',
+            type: 'POST',
+            data: {
+                code: params
+            },
+            success: res => {
+                
+            },
+            error: err => {
+                console.log(err);
+            }
+        })
+    }
+
     function rupiah(bilangan) {
         var number_string = bilangan.toString(),
             sisa = number_string.length % 3,
@@ -520,6 +616,14 @@ $new = new pos_new;
         }
 
         return rupiah;
+    }
+
+    function ketikRupiah(params) {
+        if (params.value != '') {
+            $(`#${params.id}`).attr('data-val', params.val)
+            $(`#${params.id}`).val(rupiah(params.val))
+        }
+        
     }
 </script>
 

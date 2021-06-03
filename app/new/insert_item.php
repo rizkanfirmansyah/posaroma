@@ -24,18 +24,19 @@ $end_date_discount = $data['harga']["end_date_discount"];
 $non_discount = $data['harga']["non_discount"];
 $location_id = $data['harga']["location_id"];
 $end_date_discount_total = $data['harga']["end_date_discount_total"];
-$total = intval($amount) - intval($data['harga']["discount_total"]);
+$total = intval($amount) - $discount;
 $uid = $_SESSION['loginname'];
 $dlu = date('Y-m-d H:i:s');
-$line =  $new->check_item_sales($_POST['code']) + 1;
+$line =  $new->check_item_sales($ref) + 1;
 
 $dbpdo = DB::create();
-$code = $_POST['code'];
+$code = $ref;
 
 $data_item_tmp = $new->check_item_tmp($code, $item_code);
 if ($data_item_tmp['column'] > 0) {
     $setqty = intval($data_item_tmp['line']['qty']) + 1;
-    $sqlstr = "update sales_invoice_tmp SET qty='" . $setqty . "' WHERE ref=? AND line=?";
+    $settotal = intval($data_item_tmp['line']['total']) + $unit_price - $discount ;
+    $sqlstr = "update sales_invoice_tmp SET qty='" . $setqty . "', total='".$settotal."' WHERE ref=? AND line=?";
     $sql = $dbpdo->prepare($sqlstr);
     $sql->execute([$code, $data_item_tmp['line']['line']]);
 } else {

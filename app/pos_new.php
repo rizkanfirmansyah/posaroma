@@ -267,9 +267,9 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalPaymentTitle">Pembayaran Nota:<?= $_GET['code'] ?></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
-                        </button>
+                        </button> -->
                     </div>
                     <div class="modal-body" style="padding:20px;">
                         <label for="total">Total</label>
@@ -277,9 +277,9 @@
                         <label for="discount">Discount</label>
                         <input type="text" class="form-control payments" placeholder="Value Discount" value="0" id="discountPayment" disabled>&nbsp;
                         <label for="ovo">Ovo</label>
-                        <input type="text" class="form-control payments" placeholder="Value Ovo">&nbsp;
+                        <input type="text" class="form-control payments" placeholder="Value Ovo" id="ovoPayment">&nbsp;
                         <label for="debit">Debit</label>
-                        <input type="text" class="form-control payments" placeholder="Value Debit">&nbsp;
+                        <input type="text" class="form-control payments" placeholder="Value Debit" id="debitPayment">&nbsp;
                         <label for="cash">Cash</label>
                         <input type="text" class="form-control payments" placeholder="Value Cash" id="cashPayment">&nbsp;
                         <label for="kembalian">Kembalian</label>
@@ -303,7 +303,7 @@
     <script>
         $(document).on('keyup keydown', function(e) {
             let key = e.key
-            if (key == 'delete') {
+            if (key == 'Delete') {
                 let html = `
                 <div class="container" style="padding:20px; margin-right:20px; width:90%;">
                     <label style="color:#fff;"> Code </label> &nbsp;
@@ -346,17 +346,32 @@
                 $('#tanggal').text(tgl)
             }, 1000);
 
-            $('#modalPayment').on('keyup', '.payments', function(e) {
+            $('#modalPayment').on('keyup change', '.payments', function(e) {
                 let id = $(this).attr('id');
-                let value = $(this).val().replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '')
+                let value = titikHilang($(this).val())
                 let val = value.replace('.', '')
                 let charCode = /^[0-9]+$/
+
                 if (value.match(charCode)) {
                     ketikRupiah({
                         id: id,
                         val: val
                     })
                 }
+
+                if (e.key == 'Enter') {
+                    alert()
+                }
+
+
+                let data = subTotalPayment(['ovoPayment', 'cashPayment', 'debitPayment'])
+                let ovo = data[0].ovo >= 0 ? data[0].ovo : 0
+                let cash = data[0].cash >= 0 ? data[0].cash : 0
+                let debit = data[0].debit >= 0 ? data[0].debit : 0
+
+                let kembalian = subTotal($('#totalPayment').data('value'), (ovo + cash + debit))
+                $('#kembalianPayment').val(rupiah(kembalian))
+
             })
 
             $('#InputanItem').focus()
@@ -513,7 +528,7 @@
                 $('#modalPayment').modal()
                 let total = await getTotalPrice()
                 $('#totalPayment').val(rupiah(total))
-                $('#totalPayment').data('value', total)
+                $('#totalPayment').attr('data-value', total)
             }
         }
 
@@ -622,10 +637,37 @@
 
         function ketikRupiah(params) {
             if (params.value != '') {
-                $(`#${params.id}`).attr('data-val', params.val)
                 $(`#${params.id}`).val(rupiah(params.val))
             }
 
+        }
+
+        function titikHilang(data) {
+            return data.replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '')
+        }
+
+
+        function subTotalPayment(id) {
+            let ovo = parseInt(titikHilang($(`#${id[0]}`).val()))
+            let cash = parseInt(titikHilang($(`#${id[1]}`).val()))
+            let debit = parseInt(titikHilang($(`#${id[2]}`).val()))
+            data = [{
+                ovo: ovo,
+                cash: cash,
+                debit: debit
+            }]
+            return data;
+        }
+
+        function subTotal(total, bayar) {
+            let data = 0
+            if (total > bayar) {
+                data = 0
+            } else {
+                data = bayar - total
+            }
+
+            return data
         }
     </script>
 

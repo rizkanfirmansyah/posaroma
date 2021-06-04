@@ -974,6 +974,13 @@ function numberreplace($string="0") {
 	return $string;	
 }
 
+function numbervalue($string="0") {
+
+	$string = str_replace(".","",(empty($string)) ? 0 : $string);
+	
+	return $string;	
+}
+
 function random($number) 
 {
 	if ($number)
@@ -1930,4 +1937,3 @@ function notran($tanggal, $frmcode, $save, $ref, $vardms='') {
 		
 	return $ref;
 }
-?>

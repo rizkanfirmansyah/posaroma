@@ -261,7 +261,7 @@
 
         <!-- MODAL -->
 
-        <!-- Modal -->
+        <!-- Modal Transaksi -->
         <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPaymentTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -271,23 +271,48 @@
                             <span aria-hidden="true">&times;</span>
                         </button> -->
                     </div>
-                    <div class="modal-body" style="padding:20px;">
-                        <label for="total">Total</label>
-                        <input type="text" class="form-control" placeholder="Value Total" id="totalPayment" disabled>&nbsp;
-                        <label for="discount">Discount</label>
-                        <input type="text" class="form-control payments" placeholder="Value Discount" value="0" id="discountPayment" disabled>&nbsp;
-                        <label for="ovo">Ovo</label>
-                        <input type="text" class="form-control payments" placeholder="Value Ovo" id="ovoPayment">&nbsp;
-                        <label for="debit">Debit</label>
-                        <input type="text" class="form-control payments" placeholder="Value Debit" id="debitPayment">&nbsp;
-                        <label for="cash">Cash</label>
-                        <input type="text" class="form-control payments" placeholder="Value Cash" id="cashPayment">&nbsp;
-                        <label for="kembalian">Kembalian</label>
-                        <input type="text" class="form-control" placeholder="Value Kembalian" value="0" id="kembalianPayment" disabled>&nbsp;
+                    <form action="#" id="inputPayment">
+                        <div class="modal-body" style="padding:20px;">
+                            <label for="total">Total</label>
+                            <input type="text" class="form-control" placeholder="Value Total" id="totalPayment" disabled>&nbsp;
+                            <label for="discount">Discount</label>
+                            <input type="text" class="form-control payments" placeholder="Value Discount" value="0" id="discountPayment" name="discount" disabled>&nbsp;
+                            <label for="ovo">Ovo</label>
+                            <input type="text" class="form-control payments" placeholder="Value Ovo" id="ovoPayment" value="0" name="ovo">&nbsp;
+                            <label for="debit">Debit</label>
+                            <input type="text" class="form-control payments" placeholder="Value Debit" value="0" id="debitPayment" name="debit">&nbsp;
+                            <label for="cash">Cash</label>
+                            <input type="text" class="form-control payments" placeholder="Value Cash" value="0" id="cashPayment" name="cash">&nbsp;
+                            <label for="kembalian">Kembalian</label>
+                            <input type="text" class="form-control" placeholder="Value Kembalian" value="0" id="kembalianPayment" disabled>&nbsp;
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Bayar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Done-->
+        <div class="modal fade" id="modalDone" tabindex="-1" role="dialog" aria-labelledby="modalDoneTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalDoneTitle">Pembayaran Nota:<?= $_GET['code'] ?></h5>
+                        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button> -->
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i> Bayar</button>
-                    </div>
+                    <form action="#" id="inputPayment">
+                        <div class="modal-body text-center" style="padding:20px;">
+                            <h1><span class="text-muted">Transaksi Berhasil</span></h1>
+                            <i class="fa fa-3x text-success fa-check"></i>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-dollar-sign"></i> print <i class="fas fa-print"></i></button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -346,6 +371,23 @@
                 $('#tanggal').text(tgl)
             }, 1000);
 
+            $('#inputPayment').on('submit', function(e) {
+                e.preventDefault();
+                if ($('#kembalianPayment').val() < 1) {
+                    alert('Pembayaran tidak mencukupi transaksi!')
+                    return 0;
+                }
+                let total = $('#totalPayment').data('value')
+                let code = '<?= $_GET['code'] ?>'
+                let data = new FormData(this)
+                data.append('discount', $('#discountPayment').val())
+                data.append('code', code)
+                data.append('total', total)
+                if (confirm('Apakah transaksi sudah benar?')) {
+                    confirmPayment(data)
+                }
+            })
+
             $('#modalPayment').on('keyup change', '.payments', function(e) {
                 let id = $(this).attr('id');
                 let value = titikHilang($(this).val())
@@ -358,11 +400,6 @@
                         val: val
                     })
                 }
-
-                if (e.key == 'Enter') {
-                    alert()
-                }
-
 
                 let data = subTotalPayment(['ovoPayment', 'cashPayment', 'debitPayment'])
                 let ovo = data[0].ovo >= 0 ? data[0].ovo : 0
@@ -434,7 +471,7 @@
                     data: {
                         itemCode: code,
                         itemQty: qty,
-                        code: '<?= $_GET['code'] ?>'
+                        code: '<?= $_GET['code'] ?>',
                     },
                     success: res => {
                         let response = JSON.parse(res)
@@ -668,6 +705,21 @@
             }
 
             return data
+        }
+
+        function confirmPayment(data) {
+            $.ajax({
+                url: 'new/insert_payment.php',
+                type: 'POST',
+                data: data,
+                contentType: false,
+                processData: false,
+                success: res => {
+                    $('#modalPayment').modal('hide')
+                    $('#modalDone').modal()
+                },
+                error: err => console.log(err)
+            })
         }
     </script>
 

@@ -440,9 +440,9 @@
                             console.log(err);
                         }
                     })
-                } else if (key == 'Delete') {
+                } else if (key == 'Escape') {
+                    $('#zero-space').html('')
                     $('#InputanItem').focus()
-                    $('#zero-space').html('ss')
                 }
             })
 

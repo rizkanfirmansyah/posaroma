@@ -228,9 +228,7 @@
                                             <td>Total Harga</td>
                                         </tr>
                                     </thead>
-                                    <tbody id="myList">
-
-                                    </tbody>
+                                    <tbody id="myList"></tbody>
                                 </table>
                             </div>
                         </div>
@@ -257,7 +255,7 @@
 
         <footer>
 
-            <input type="hidden" id="checkInvoiceTmp" value="<?= $new->check_item_sales($_GET['code']) ?>">
+            <input type="hidden" id="checkInvoiceTmp" value="0">
 
         </footer>
 
@@ -424,7 +422,7 @@
 
             getdata('<?= $_GET['code'] ?>')
 
-            $('#zero-space').on('keydown', '#deleteItem', function(e) {
+            $('#zero-space').on('keydown', 'input', function(e) {
                 let key = e.key
                 if (key == 'Enter') {
                     let value = $(this).val()
@@ -443,8 +441,8 @@
                         }
                     })
                 } else if (key == 'Delete') {
-                    $('#zero-space').html('')
                     $('#InputanItem').focus()
+                    $('#zero-space').html('ss')
                 }
             })
 
@@ -571,7 +569,7 @@
                     $('#InputanItem').focus()
                 }
             } else if (x == 'F4') {
-                let tmp = $('#checkInvoiceTmp').val()
+                let tmp = $('#totalQty').text()
                 if (tmp < 1) {
                     alert('Transaksi Belum ada!');
                     return 0;

@@ -257,6 +257,8 @@
 
         <footer>
 
+            <input type="hidden" id="checkInvoiceTmp" value="<?= $new->check_item_sales($_GET['code']) ?>">
+
         </footer>
 
         <!-- MODAL -->
@@ -266,7 +268,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalPaymentTitle">Pembayaran Nota:<?= $_GET['code'] ?></h5>
+                        <h5 class="modal-title" id="modalPaymentTitle">Pembayaran</h5>
                         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button> -->
@@ -304,15 +306,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button> -->
                     </div>
-                    <form action="#" id="inputPayment">
-                        <div class="modal-body text-center" style="padding:20px;">
-                            <h1><span class="text-muted">Transaksi Berhasil</span></h1>
-                            <i class="fa fa-3x text-success fa-check"></i>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success"><i class="fas fa-dollar-sign"></i> print <i class="fas fa-print"></i></button>
-                        </div>
-                    </form>
+                    <div class="modal-body text-center" style="padding:20px;">
+                        <h1><span class="text-muted">Transaksi Berhasil</span></h1>
+                        <i class="fa fa-3x text-success fa-check"></i>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="fas fa-print"></i> Print </button>
+                        <?php
+                        $data = $new->check_invoice() + 1;
+                        $code  = "20" . date('Ymd') . rand(122345, 2329792) . '0000' . $data
+                        ?>
+                        <a href="pos_new.php?code=<?= $code ?>" class="btn btn-success"><i class="fas fa-clipboard-list"></i> New </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -373,11 +378,15 @@
 
             $('#inputPayment').on('submit', function(e) {
                 e.preventDefault();
-                if ($('#kembalianPayment').val() < 1) {
+                let res = subTotalPayment(['ovoPayment', 'cashPayment', 'debitPayment'])
+                let ovo = res[0].ovo >= 0 ? res[0].ovo : 0
+                let cash = res[0].cash >= 0 ? res[0].cash : 0
+                let debit = res[0].debit >= 0 ? res[0].debit : 0
+                let total = $('#totalPayment').data('value')
+                if ((ovo + cash + debit) < total) {
                     alert('Pembayaran tidak mencukupi transaksi!')
                     return 0;
                 }
-                let total = $('#totalPayment').data('value')
                 let code = '<?= $_GET['code'] ?>'
                 let data = new FormData(this)
                 data.append('discount', $('#discountPayment').val())
@@ -562,6 +571,11 @@
                     $('#InputanItem').focus()
                 }
             } else if (x == 'F4') {
+                let tmp = $('#checkInvoiceTmp').val()
+                if (tmp < 1) {
+                    alert('Transaksi Belum ada!');
+                    return 0;
+                }
                 $('#modalPayment').modal()
                 let total = await getTotalPrice()
                 $('#totalPayment').val(rupiah(total))
@@ -717,6 +731,7 @@
                 success: res => {
                     $('#modalPayment').modal('hide')
                     $('#modalDone').modal()
+                    // window.open("new/print.php", '_blank');
                 },
                 error: err => console.log(err)
             })

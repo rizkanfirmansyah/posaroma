@@ -74,9 +74,9 @@ foreach ($data as $item) {
     $date = date('Y-m-d');
     $dlu = date('Y-m-d');
 
-    // $sqlstr = "insert into sales_invoice_detail (ref, item_code, uom_code, qty, end_date_discount, discount, discount3, unit_price, amount, line, ref_near_expired) values ('$ref', '$item_code', '$uom_code', '$qty', '$end_date_discount', '$discount', '$discount3', '$unit_price', '$amount',  '$line', '$ref_near_expired')";
-    // $sql = $dbpdo->prepare($sqlstr);
-    // $sql->execute();
+    $sqlstr = "insert into sales_invoice_detail (ref, item_code, uom_code, qty, end_date_discount, discount, discount3, unit_price, amount, line, ref_near_expired) values ('$ref', '$item_code', '$uom_code', '$qty', '$end_date_discount', '$discount', '$discount3', '$unit_price', '$amount',  '$line', '$ref_near_expired')";
+    $sql = $dbpdo->prepare($sqlstr);
+    $sql->execute();
 
     //----------insert bincard (debit qty)
     // $sqlstr = "insert into bincard (invoice_no, location_code, date, invoice_type, description, item_code, uom_code, unit_price, debit_qty, credit_qty, amount, line, uid, dlu, expired_date) values ('$ref', '$location_id', '$date', 'pos', '', '$item_code', '$uom_code', '$unit_price', 0, '$qty', '$amount', '$line', '$uid', '$dlu')";
@@ -88,10 +88,10 @@ foreach ($data as $item) {
 // $sql = $dbpdo->prepare($sqlstr);
 // $sql->execute();
 
-// $due_date = date('Y-m-d');
+$due_date = date('Y-m-d');
 
-// $sqlstr = "insert into sales_invoice (ref, date, status, top, due_date, client_code, ship_to, bill_to, tax_code, tax_rate, freight_cost, freight_account, currency_code, rate, employee_id, total, memo, opening_balance, cash, location_id, deposit, taxable, photo_file, cash_amount, cash_voucher, ovo, gopay, bank_id, bank_amount, credit_card_code, card_amount, credit_card_no, credit_card_holder, change_amount, shift, client_member_code, id_comp, upd_approved_over, uid, dlu) values('$ref', '$date', 'R', '$top', '$due_date', '$client_code', '$ship_to', '$bill_to', '$tax_code', '$tax_rate', '$freight_cost', '$freight_account', '$currency_code', '$rate', '$employee_id', '$total', '$memo', 0, '$cash', '$location_id', '$deposit', '$taxable', '$photo_file', '$cash_amount', '$cash_voucher', '$ovo', '$gopay', '$bank_id', '$bank_amount', '$credit_card_code', '$card_amount', '$credit_card_no', '$credit_card_holder', '$change_amount', '$shift', '$client_member_code', '$id_comp', '$upd_approved_over', '$uid', '$dlu')";
-// $sql = $dbpdo->prepare($sqlstr);
-// $sql->execute();
+$sqlstr = "insert into sales_invoice (ref, date, status, top, due_date, client_code, ship_to, bill_to, tax_code, tax_rate, freight_cost, freight_account, currency_code, rate, employee_id, total, memo, opening_balance, cash, location_id, deposit, taxable, photo_file, cash_amount, cash_voucher, ovo, gopay, bank_id, bank_amount, credit_card_code, card_amount, credit_card_no, credit_card_holder, change_amount, shift, client_member_code, id_comp, upd_approved_over, uid, dlu) values('$ref', '$date', 'R', '$top', '$due_date', '$client_code', '$ship_to', '$bill_to', '$tax_code', '$tax_rate', '$freight_cost', '$freight_account', '$currency_code', '$rate', '$employee_id', '$total', '$memo', 0, '$cash', '$location_id', '$deposit', '$taxable', '$photo_file', '$cash_amount', '$cash_voucher', '$ovo', '$gopay', '$bank_id', '$bank_amount', '$credit_card_code', '$card_amount', '$credit_card_no', '$credit_card_holder', '$change_amount', '$shift', '$client_member_code', '$id_comp', '$upd_approved_over', '$uid', '$dlu')";
+$sql = $dbpdo->prepare($sqlstr);
+$sql->execute();
 
 echo json_encode(['status' => 200, 'message' => 'Transaksi berhasil']);

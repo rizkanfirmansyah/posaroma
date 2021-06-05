@@ -897,7 +897,11 @@ if (!isset($_SESSION['lebarlayar'])) {
 					// ===========================================================================================
 					// ===========================================================================================
 					$data = $new->check_invoice() + 1;
-					header("location: app/pos_new.php?code=20" . date('Ymd') . rand(122345, 2329792) . '0000' . $data, true, 301);
+					if (empty($_GET['search'])) {
+						header("location: app/pos_new.php?code=20" . date('Ymd') . rand(122345, 2329792) . '0000' . $data, true, 301);
+					} else {
+						header("location: app/pos_new.php?code=20" . date('Ymd') . rand(122345, 2329792) . '0000' . $data . '&ref=' . $_GET['search'], true, 301);
+					}
 					exit();
 				}
 				if ($act == obraxabrix('pos_view')) {

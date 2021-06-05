@@ -72,21 +72,21 @@ foreach ($data as $item) {
     $line = $item['line'];
     $ref_near_expired = $item['ref_near_expired'];
     $date = date('Y-m-d');
-    $dlu = date('Y-m-d');
+    $dlu = date('Y-m-d H:i:s');
 
     $sqlstr = "insert into sales_invoice_detail (ref, item_code, uom_code, qty, end_date_discount, discount, discount3, unit_price, amount, line, ref_near_expired) values ('$ref', '$item_code', '$uom_code', '$qty', '$end_date_discount', '$discount', '$discount3', '$unit_price', '$amount',  '$line', '$ref_near_expired')";
     $sql = $dbpdo->prepare($sqlstr);
     $sql->execute();
 
-    //----------insert bincard (debit qty)
+    // ----------insert bincard (debit qty)
     // $sqlstr = "insert into bincard (invoice_no, location_code, date, invoice_type, description, item_code, uom_code, unit_price, debit_qty, credit_qty, amount, line, uid, dlu, expired_date) values ('$ref', '$location_id', '$date', 'pos', '', '$item_code', '$uom_code', '$unit_price', 0, '$qty', '$amount', '$line', '$uid', '$dlu')";
     // $sql = $dbpdo->prepare($sqlstr);
     // $sql->execute();
 }
 
-// $sqlstr = "delete from sales_invoice_tmp where ref='$code'";
-// $sql = $dbpdo->prepare($sqlstr);
-// $sql->execute();
+$sqlstr = "delete from sales_invoice_tmp where ref='$code'";
+$sql = $dbpdo->prepare($sqlstr);
+$sql->execute();
 
 $due_date = date('Y-m-d');
 
@@ -94,4 +94,4 @@ $sqlstr = "insert into sales_invoice (ref, date, status, top, due_date, client_c
 $sql = $dbpdo->prepare($sqlstr);
 $sql->execute();
 
-echo json_encode(['status' => 200, 'message' => 'Transaksi berhasil']);
+echo json_encode(['status' => 200, 'message' => 'Transaksi berhasil', 'ref' => $ref]);
